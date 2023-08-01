@@ -44,7 +44,7 @@ This code tells your app to send down the Access-Control-Allow-Origin header wit
 
 
 1. Simple Request
-If Access-Control-Allow-Origin is set as * , it allows all url.
+- If Access-Control-Allow-Origin is set as * , it allows all url.
 
 
 2. Preflighted Request
