@@ -1,7 +1,7 @@
 # SOP - Same Origin Policy
 
 __SOP__ is a policy that stops one website from reading or writing data to another website. (ensures basic web security).
-_ Allows a website to request data from its own URL and blocks anything from an external URL
+- Allows a website to request data from its own URL and blocks anything from an external URL
 
 * A security restriction on what web content JavaScript can interact with. JavaScript can manipulate the DOM object through DOM API provided by browser, JavaScript can also interact with server through browser built-in XMLHttpRequest object.
 
@@ -25,13 +25,16 @@ __CORS__ is a mechanism tha allows a website on one URL to request data from ano
 ## How CORS Work?
 
 1. Client request
-When the browser is making a cross-origin request, the browser adds an Origin header with the current origin (scheme, host, and port).
+
+    When the browser is making a cross-origin request, the browser adds an Origin header with the current origin (scheme, host, and port).
 
 2. Server response 
-On the server side, when a server sees this header, and wants to allow access, it needs to add an Access-Control-Allow-Origin header to the response specifying the requesting origin (or * to allow any origin.)
+
+    On the server side, when a server sees this header, and wants to allow access, it needs to add an Access-Control-Allow-Origin header to the response specifying the requesting origin (or * to allow any origin.)
 
 3. Browser recieves response
-When the browser sees this response with an appropriate Access-Control-Allow-Origin header, the browser allows the response data to be shared with the client site.
+
+    When the browser sees this response with an appropriate Access-Control-Allow-Origin header, the browser allows the response data to be shared with the client site.
 
 
 `app.use(cors({ origin: "http://localhost:1234" }))`
