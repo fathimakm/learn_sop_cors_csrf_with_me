@@ -37,3 +37,16 @@ When the browser sees this response with an appropriate Access-Control-Allow-Ori
 `app.use(cors({ origin: "http://localhost:1234" }))`
 
 This code tells your app to send down the Access-Control-Allow-Origin header with the value of http://localhost:1234
+
+
+
+###  CORS divides cross-site requests into two categories.
+
+
+1. Simple Request
+
+
+2. Preflighted Request
+- Any HTTP request with non-standard headers like PUT PATCH, DELETE will need to go through __PreFlight__ (It's like a sanity check to ensure that it's safe)
+
+- this kind of requests first send an HTTP request by the ‘__OPTIONS__’ method to the resource on the other domain, to determine if the actual request is safe to send.
