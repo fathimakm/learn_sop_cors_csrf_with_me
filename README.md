@@ -16,3 +16,24 @@ Only if these three are the same for two different origins, the browser allows c
 # CORS - Cross Origin Resource Sharing
 
 __CORS__ is a mechanism tha allows a website on one URL to request data from another URL
+
+-  HTTP-header based mechanism that allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources
+
+
+- CORS also relies on a mechanism by which browsers make a "preflight" request to the server hosting the cross-origin resource, in order to check that the server will permit the actual request. In that preflight, the browser sends headers that indicate the HTTP method and headers that will be used in the actual request.
+
+## How CORS Work?
+
+1. Client request
+When the browser is making a cross-origin request, the browser adds an Origin header with the current origin (scheme, host, and port).
+
+2. Server response 
+On the server side, when a server sees this header, and wants to allow access, it needs to add an Access-Control-Allow-Origin header to the response specifying the requesting origin (or * to allow any origin.)
+
+3. Browser recieves response
+When the browser sees this response with an appropriate Access-Control-Allow-Origin header, the browser allows the response data to be shared with the client site.
+
+
+app.use(cors({ origin: "http://localhost:1234" }))
+
+<!-- This code tells your app to send down the Access-Control-Allow-Origin header with the value of http://localhost:1234 -->
