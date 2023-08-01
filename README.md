@@ -44,9 +44,21 @@ This code tells your app to send down the Access-Control-Allow-Origin header wit
 
 
 1. Simple Request
+If Access-Control-Allow-Origin is set as * , it allows all url.
 
 
 2. Preflighted Request
 - Any HTTP request with non-standard headers like PUT PATCH, DELETE will need to go through __PreFlight__ (It's like a sanity check to ensure that it's safe)
 
 - this kind of requests first send an HTTP request by the ‘__OPTIONS__’ method to the resource on the other domain, to determine if the actual request is safe to send.
+
+- preflight request will contain the __Access-Control-Request-Method__ and __Access-Control-Request-Headers__ headers. These headers contain the value of the method and headers that the client wants to use in the request and the server will return back if the method and headers are valid.
+
+`const cors = require("cors")`
+
+`app.use(
+  cors({
+    origin: "http://localhost:1234",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+  }))`
