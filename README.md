@@ -70,3 +70,7 @@ This code tells your app to send down the Access-Control-Allow-Origin header wit
   -  Potential for cross-domain attacks if a website's CORS policy is poorly configured and implemented. 
 
   - CORS is not a protection against cross-origin attacks such as __cross-site request forgery (CSRF)__.
+
+
+  ### Testing for CORS Misconfiguration
+  1. Change the origin header to an arbitrary value
