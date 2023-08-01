@@ -62,3 +62,8 @@ If Access-Control-Allow-Origin is set as * , it allows all url.
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type"],
   }))`
+
+
+  -  Potential for cross-domain attacks if a website's CORS policy is poorly configured and implemented. 
+
+  - CORS is not a protection against cross-origin attacks such as __cross-site request forgery (CSRF)__.
