@@ -42,12 +42,14 @@ __CORS__ is a mechanism tha allows a website on one URL to request data from ano
 This code tells your app to send down the Access-Control-Allow-Origin header with the value of http://localhost:1234
 
 
+- If Access-Control-Allow-Origin is set as * , it allows all url.
+
 
 ###  CORS divides cross-site requests into two categories.
 
 
 1. Simple Request
-- If Access-Control-Allow-Origin is set as * , it allows all url.
+
 
 
 2. Preflighted Request
