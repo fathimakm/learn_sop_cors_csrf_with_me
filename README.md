@@ -88,7 +88,7 @@ This code tells your app to send down the Access-Control-Allow-Origin header wit
 
     `url: https://portswigger.com`
     `origin: https://randomscam.portswigger.com.`
-    `Access-Control-Allow-Origin:https://randomscam.portswigger.com is reflected in response.`
+    `Access-Control-Allow-Origin:https://randomscam.portswigger.com` is reflected in response.
 
 
 
