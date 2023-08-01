@@ -94,3 +94,12 @@ This code tells your app to send down the Access-Control-Allow-Origin header wit
 
 
 
+*****
+# CSRF - Cross-site request forgery
+
+__Cookie Flow__
+when you login in a web app > you get a cookie> which gets stored in your browser> whenever you make a request to this web application > the cookie in the browser is automatically send automatically - so the web app can verify your login.
+
+__cross domian access control__
+
+
