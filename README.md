@@ -74,12 +74,10 @@ This code tells your app to send down the Access-Control-Allow-Origin header wit
 
   ### Testing for CORS Misconfiguration
   1. Change the origin header to an arbitrary value
-    - if we add origin:https://example.com
-        we get Access-Control-Allow-Origin:https://example.com as a response
+    `if we add origin:https://example.com we get Access-Control-Allow-Origin:https://example.com as a response`
 
   2. change the origin header to a null value (use iframe)
-    - origin : null
-        we get Access-Control-Allow-Origin:null
+    `origin : null we get Access-Control-Allow-Origin:null`
 
   3. changet he origin header to one that begins with the origin of the site
     - url: https://portswigger.com
