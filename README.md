@@ -102,4 +102,16 @@ when you login in a web app > you get a cookie> which gets stored in your browse
 
 __cross domian access control__
 
+- In html we have iframe, an iframe allows you to embed one website in another website.
+- But the cross iframe is not possible due to same origin policy (this is important because cookies are automatically sent on every request you make to that domain unless there are some flags set)
+
+
+- The policy only allows you to read from the iframe if the conditions of same origin policy is satisfied.
+(this not only applies to iframe but ajax request)
+
+`website URL: https://google.com:80`
+`iframed URL: https"//google.com:80`
+
+__Cross-site request forgery__ when one domain is making one or more requests to another domain in order to modify some value
+
 
