@@ -34,6 +34,6 @@ On the server side, when a server sees this header, and wants to allow access, i
 When the browser sees this response with an appropriate Access-Control-Allow-Origin header, the browser allows the response data to be shared with the client site.
 
 
-app.use(cors({ origin: "http://localhost:1234" }))
+`app.use(cors({ origin: "http://localhost:1234" }))`
 
-<!-- This code tells your app to send down the Access-Control-Allow-Origin header with the value of http://localhost:1234 -->
+This code tells your app to send down the Access-Control-Allow-Origin header with the value of http://localhost:1234
