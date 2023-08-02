@@ -17,6 +17,11 @@ Only if these three are the same for two different origins, the browser allows c
 
 __CORS__ is a mechanism tha allows a website on one URL to request data from another URL
 
+website 1 request data from website 2 of certain content type> only if aceess- control-allow-origin : website 1 and access-control-allow-header: content type desired> cors work
+
+* Json csrf with adobe flash is possible(uses redirection)>victim to vulnerable.com
+        a content type header is added to the flash file and all the json data that we want to send and end point is also specified not vulnerable.com byrt 307 redirect page> which in turn redirects to vulnerable.com
+
 -  HTTP-header based mechanism that allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources
 
 
@@ -107,11 +112,16 @@ __cross domian access control__
 
 
 - The policy only allows you to read from the iframe if the conditions of same origin policy is satisfied.
-(this not only applies to iframe but ajax request)
+(this not only applies to iframe but ajax request)(ajax request-  Asynchronous JavaScript and XML. It is a technique used in web development to make requests to a server and retrieve data without needing to reload the entire web page, update and loads only specific parts of the page.> XMLHttpRequest,fetch(), $.ajax())
 
 `website URL: https://google.com:80`
 `iframed URL: https"//google.com:80`
 
-__Cross-site request forgery__ when one domain is making one or more requests to another domain in order to modify some value
+### __Cross-site request forgery__
+ when one domain is making one or more requests to another domain in order to modify some value.
+
+one of the __solution__ is to use randomised tokens called __Anti CSRF Tokens__
+* this will be generated randomly by the web application in the backend and sent to the website
+* on every request it's validated (so another website can't make cross origin request or cross domain request)
 
 
