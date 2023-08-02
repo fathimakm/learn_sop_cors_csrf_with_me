@@ -112,10 +112,13 @@ __cross domian access control__
 
 
 - The policy only allows you to read from the iframe if the conditions of same origin policy is satisfied.
-(this not only applies to iframe but ajax request)(ajax request-  Asynchronous JavaScript and XML. It is a technique used in web development to make requests to a server and retrieve data without needing to reload the entire web page, update and loads only specific parts of the page.> XMLHttpRequest,fetch(), $.ajax())
 
+ 
 `website URL: https://google.com:80`
 `iframed URL: https"//google.com:80`
+
+* (this not only applies to iframe but ajax request)(ajax request-  Asynchronous JavaScript and XML. It is a technique used in web development to make requests to a server and retrieve data without needing to reload the entire web page, update and loads only specific parts of the page.> XMLHttpRequest,fetch(), $.ajax())
+
 
 ## __Cross-site request forgery__
  when one domain is making one or more requests to another domain in order to modify some value.
