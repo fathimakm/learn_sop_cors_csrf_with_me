@@ -124,7 +124,29 @@ __cross domian access control__
  when one domain is making one or more requests to another domain in order to modify some value.
 
 one of the __solution__ is to use randomised tokens called __Anti CSRF Tokens__
-* this will be generated randomly by the web application in the backend and sent to the website
+* this will be generated randomly by the server side web application in the backend and sent to the website
 * on every request it's validated (so another website can't make cross origin request or cross domain request)
 
 
+## How CSRF Works
+
+For a CSRF attack to be possible, three key conditions must be in place:
+
+* A relevant action (like changing email id, password etc)
+* Cookie-based session handling (when you login you get a cookie which is used for verifying identity)
+* No unpredictable request parameters (attacker can't access or guess password, so it can't be requested)
+
+## Common defences against CSRF
+
+* CSRF tokens
+* SameSite cookies
+* Referer-based validation
+
+
+
+
+# Difference between XSS and CSRF
+
+Cross-site scripting allows an attacker to execute arbitrary JavaScript within the browser of a victim user. 
+
+Cross-site request forgery allows an attacker to induce a victim user to perform actions that they do not intend to. 
