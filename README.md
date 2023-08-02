@@ -15,17 +15,17 @@ Only if these three are the same for two different origins, the browser allows c
 
 # CORS - Cross Origin Resource Sharing
 
-__CORS__ is a mechanism tha allows a website on one URL to request data from another URL
+__CORS__ is a HTTP header based mechanism tha allows a website on one URL to request data from another URL
 
-website 1 request data from website 2 of certain content type> only if aceess- control-allow-origin : website 1 and access-control-allow-header: content type desired> cors work
+website 1 request data from website 2 of certain content type> only if access- control-allow-origin : website 1 and access-control-allow-header: content type desired> cors work
 
-* Json csrf with adobe flash is possible(uses redirection)>victim to vulnerable.com
-        a content type header is added to the flash file and all the json data that we want to send and end point is also specified not vulnerable.com byrt 307 redirect page> which in turn redirects to vulnerable.com
-
--  HTTP-header based mechanism that allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources
+* Json csrf with adobe flash is possible(uses redirection)>victim to vulnerable.com >
+        a content type header is added to the flash file and all the json data that we want to send and end point is also specified not vulnerable.com but 307 redirect page> which in turn redirects to vulnerable.com
 
 
-- CORS also relies on a mechanism by which browsers make a "preflight" request to the server hosting the cross-origin resource, in order to check that the server will permit the actual request. In that preflight, the browser sends headers that indicate the HTTP method and headers that will be used in the actual request.
+- CORS also relies on a mechanism by which browsers make a "preflight" request to the server hosting the cross-origin resource, in order to check that the server will permit the actual request. 
+
+- In that preflight, the browser sends headers that indicate the HTTP method and headers that will be used in the actual request.
 
 ## How CORS Work?
 
