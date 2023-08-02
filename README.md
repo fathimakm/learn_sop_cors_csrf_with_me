@@ -150,3 +150,14 @@ For a CSRF attack to be possible, three key conditions must be in place:
 Cross-site scripting allows an attacker to execute arbitrary JavaScript within the browser of a victim user. 
 
 Cross-site request forgery allows an attacker to induce a victim user to perform actions that they do not intend to. 
+
+
+
+## flaws in CSRF token validation
+
+1. Some application correctly validates the token when the request uses POST method but not when GET method is used.(so attacker might replace post with GET method to bypass validation)
+
+2. Some application correctly validates the token when it is present but not if token is missing or removed.(so attacker can just remove the csrf token and attack)
+
+3. CSRF token is not tied to the user session 
+(checks if the csfr token is correct but doesn't check if the csrf belongs to the respective user. so attacker can use a completely different csrf token to attack a user since the token is not tied to the user's session cookie)
