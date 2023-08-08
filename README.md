@@ -175,7 +175,7 @@ For a CSRF attack to be possible, three key conditions must be in place:
 
 * SameSite cookies:
   - SameSite is a browser attribute for cookies that controls when they are sent in cross-origin requests.
-  - By setting SameSite attributes to "Lax" or "Strict," cookies are restricted from being sent with cross-origin requests, thus reducing the chances of CSRF attacks. In "Lax" mode, cookies are not sent in requests triggered by external sites that navigate to your site. In "Strict" mode, cookies are not sent in any cross-origin requests.
+  - In "Lax" mode, cookies are not sent in requests triggered by external sites that navigate to your site. In "Strict" mode, cookies are not sent in any cross-origin requests.
 * Referer-based validation: Some applications use the HTTP Referer header to validate whether the request originates from the same domain. 
   - This approach is less secure than using CSRF tokens, as the Referer header can be spoofed or removed by certain browser privacy settings.
 
@@ -221,6 +221,20 @@ Cross-site request forgery allows an attacker to induce a victim user to perform
 
 ## SameSite
 
+1. Strict
+
+   cookies are not sent in any cross-origin requests.
+
+2. Lax
+  cookies are not sent in requests triggered by external sites that navigate to your site
+
+  -  if these two conitions are met, browser send cookies in cross origin request > 1. The request uses the GET method. 2. The request resulted from a top-level navigation by the user, such as clicking on a link.
+
+  -  cookie is not included in cross-site POST requests > bcz POST request can modify 
+  - Cookie not included in those initiated by scripts, iframes, or references to images and other resources.
+
+3. None
+
 * "site" refers to a combination of a top-level domain (TLD) and one additional level of the domain name. This additional level is often referred to as the TLD+1.
 
 * The TLD is the highest level in the domain hierarchy, such as ".com," ".net," ".org," etc.
@@ -231,4 +245,6 @@ https://app.example.com
 
 scheme, TLD, TLD +1 > if these are same for two url > then same site
 
-if scheme, domain , port are same for two ur; > same origin
+if scheme, domain , port are same for two url > same origin
+
+`Set-Cookie: session=0F8tgdOhi9ynR1M9wa3ODa; SameSite=Strict`
