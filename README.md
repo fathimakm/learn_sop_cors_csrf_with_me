@@ -55,7 +55,7 @@ This code tells your app to send down the Access-Control-Allow-Origin header wit
 
 1. Simple Request
 
-
+  These are CORS requests that do not include credentials (cookies, HTTP authentication, etc.) in the request.
 
 2. Preflighted Request
 - Any HTTP request with non-standard headers like PUT PATCH, DELETE will need to go through __PreFlight__ (It's like a sanity check to ensure that it's safe)
@@ -78,15 +78,18 @@ This code tells your app to send down the Access-Control-Allow-Origin header wit
 
   - CORS is not a protection against cross-origin attacks such as __cross-site request forgery (CSRF)__.
 
+  - __Access-Control-Allow-Credentials: true__ ,__ it allows request to contain cookies
+
 
   ### Testing for CORS Misconfiguration
   1. Change the origin header to an arbitrary value
     if `we add origin:https://example.com` we get `Access-Control-Allow-Origin:https://example.com as a response`
 
   2. change the origin header to a null value (use iframe)
+  it means that the server is allowing requests from a specific situation where the origin cannot be determined or is considered untrusted.
     `origin : null` we get `Access-Control-Allow-Origin:null`
 
-  3. changet he origin header to one that begins with the origin of the site
+  3. changet the origin header to one that begins with the origin of the site
     if `url: https://portswigger.com`
     `origin: https://portswigger.com.scam.com`
     `Access-Control-Allow-Origin:https://portswigger.com.scam.com` is reflected in response.
@@ -98,6 +101,35 @@ This code tells your app to send down the Access-Control-Allow-Origin header wit
     `Access-Control-Allow-Origin:https://randomscam.portswigger.com` is reflected in response.
 
 
+
+## Browsers might send the value null in the Origin header in various unusual situations:
+
+
+1. Cross-origin redirects.  
+  When a web page makes a request to a different domain and that domain redirects the request back to the original domain, the Origin header may be set to "null."
+2. Requests from serialized data.
+ if a request is initiated from a piece of serialized data, like a Blob or a FormData object, and not from an actual web page (A Blob (Binary Large Object) is a data structure used in web development to represent large binary data, such as images, videos, audio, or any other type of raw data) (FormData is a built-in JavaScript object that allows you to create and manage data in HTML form format. It is typically used to send form data to a server via an XMLHttpRequest or a Fetch API request.)
+3. Request using the file: protocol.
+  When a web page is loaded from the local file system using the "file://" protocol and makes a cross-origin request
+4. Sandboxed cross-origin requests.
+  If a web page is loaded inside a sandboxed environment that restricts its access to certain features, the Origin header might be set to "null."
+
+
+
+#### some XSS attacks can indeed be prevented through effective use of CSRF tokens.
+By including CSRF tokens in requests that modify server state, the application can prevent attackers from exploiting the reflected XSS vulnerability to perform malicious actions. It ensures that even if the attacker successfully injects malicious scripts, the requests will be rejected by the server without the correct CSRF token.
+
+
+### Intranets do have an impact on CORS policies, especially regarding requests without credentials.
+ However, security practices and proper configuration are still essential to maintain a secure environment and prevent potential vulnerabilities.(Intranets are private networks within organizations that allow internal communication and collaboration.)
+
+
+ ### How to prevent CORS-based attacks
+ 1. How to prevent CORS-based attacks
+ 2. Only Allow Trusted Sites:
+ 3. Avoid Whitelisting Null:
+ 4. Avoid Wildcards in Internal Networks: When * is used, any domain is allowed to access the resources
+ 5. CORS Is Not a Substitute for Server-Side Security:
 
 *****
 # CSRF - Cross-site request forgery
@@ -138,9 +170,13 @@ For a CSRF attack to be possible, three key conditions must be in place:
 
 ## Common defences against CSRF
 
-* CSRF tokens
-* SameSite cookies
-* Referer-based validation
+* CSRF tokens: The server validates the token before processing the request, ensuring that the request originates from the legitimate user session.
+  - A common way to share CSRF tokens with the client is to include them as a hidden parameter in an HTML form
+
+* SameSite cookies:
+- SameSite is a browser attribute for cookies that controls when they are sent in cross-origin requests.
+- By setting SameSite attributes to "Lax" or "Strict," cookies are restricted from being sent with cross-origin requests, thus reducing the chances of CSRF attacks. In "Lax" mode, cookies are not sent in requests triggered by external sites that navigate to your site. In "Strict" mode, cookies are not sent in any cross-origin requests.
+* Referer-based validation: Some applications use the HTTP Referer header to validate whether the request originates from the same domain. - This approach is less secure than using CSRF tokens, as the Referer header can be spoofed or removed by certain browser privacy settings.
 
 
 
@@ -155,9 +191,29 @@ Cross-site request forgery allows an attacker to induce a victim user to perform
 
 ## flaws in CSRF token validation
 
-1. Some application correctly validates the token when the request uses POST method but not when GET method is used.(so attacker might replace post with GET method to bypass validation)
+1. Some application correctly validates the CSRF token when the request uses POST method but not when GET method is used.(so attacker might replace post with GET method to bypass validation)
 
 2. Some application correctly validates the token when it is present but not if token is missing or removed.(so attacker can just remove the csrf token and attack)
 
 3. CSRF token is not tied to the user session 
 (checks if the csfr token is correct but doesn't check if the csrf belongs to the respective user. so attacker can use a completely different csrf token to attack a user since the token is not tied to the user's session cookie)
+
+
+4. CSRF token is tied to a non-session cookie  `non-session cookie (csrfKey)`
+
+- there are two cookies present beacuse the application uses different frameworks and has different function
+
+- ( some application tie session cookie to csrf key, but sometimes csrf key and csrf token is not tied to the correct session cookie > so if we attach another csrf key and csrf token and try to manipulate > it would work)
+
+
+- first check if csrf token is tied to csrf key > by submitting invalid crsf token > or > submit a valid csrf token of another user
+- submit valid csrf token and csrf key of another user
+
+
+5. Double submit defense
+
+- both csrf token and csrf key is send to the server and only if both are same , the request is accepted
+
+- This is used in stateless aplication, where application don't store any session state or session cookies in the backend (applications that use jaw token)  
+- the value of csrf token and csrf key doesn't matter , it can be anything > but both have to be the same
+
