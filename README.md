@@ -174,9 +174,10 @@ For a CSRF attack to be possible, three key conditions must be in place:
   - A common way to share CSRF tokens with the client is to include them as a hidden parameter in an HTML form
 
 * SameSite cookies:
-- SameSite is a browser attribute for cookies that controls when they are sent in cross-origin requests.
-- By setting SameSite attributes to "Lax" or "Strict," cookies are restricted from being sent with cross-origin requests, thus reducing the chances of CSRF attacks. In "Lax" mode, cookies are not sent in requests triggered by external sites that navigate to your site. In "Strict" mode, cookies are not sent in any cross-origin requests.
-* Referer-based validation: Some applications use the HTTP Referer header to validate whether the request originates from the same domain. - This approach is less secure than using CSRF tokens, as the Referer header can be spoofed or removed by certain browser privacy settings.
+  - SameSite is a browser attribute for cookies that controls when they are sent in cross-origin requests.
+  - By setting SameSite attributes to "Lax" or "Strict," cookies are restricted from being sent with cross-origin requests, thus reducing the chances of CSRF attacks. In "Lax" mode, cookies are not sent in requests triggered by external sites that navigate to your site. In "Strict" mode, cookies are not sent in any cross-origin requests.
+* Referer-based validation: Some applications use the HTTP Referer header to validate whether the request originates from the same domain. 
+  - This approach is less secure than using CSRF tokens, as the Referer header can be spoofed or removed by certain browser privacy settings.
 
 
 
@@ -218,3 +219,16 @@ Cross-site request forgery allows an attacker to induce a victim user to perform
 - This is used in stateless aplication, where application don't store any session state or session cookies in the backend (applications that use jaw token)  
 - the value of csrf token and csrf key doesn't matter , it can be anything > but both have to be the same
 
+## SameSite
+
+* "site" refers to a combination of a top-level domain (TLD) and one additional level of the domain name. This additional level is often referred to as the TLD+1.
+
+* The TLD is the highest level in the domain hierarchy, such as ".com," ".net," ".org," etc.
+* Additional Domain Level (TLD+1): This is the next level down in the domain hierarchy. For example, if you have a domain like "example.com," the "example" part is the additional domain level (TLD+1).
+
+
+https://app.example.com
+
+scheme, TLD, TLD +1 > if these are same for two url > then same site
+
+if scheme, domain , port are same for two ur; > same origin
