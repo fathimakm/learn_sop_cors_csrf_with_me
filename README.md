@@ -210,7 +210,8 @@ Cross-site request forgery allows an attacker to induce a victim user to perform
 - submit valid csrf token and csrf key of another user
 
 
-5. Double submit defense
+5. CSRF token is simply duplicated in a cookie
+(Double submit defense)
 
 - both csrf token and csrf key is send to the server and only if both are same , the request is accepted
 
