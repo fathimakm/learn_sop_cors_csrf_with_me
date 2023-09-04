@@ -254,4 +254,39 @@ if scheme, domain , port are same for two url > same origin
 `Set-Cookie: session=0F8tgdOhi9ynR1M9wa3ODa; SameSite=Strict`
 
 ## Referer header
-Some applications use the HTTP Referer header to validate whether the request originates from the same domain.
+1. Some applications use the HTTP Referer header to validate whether the request originates from the same domain.
+
+__The Referer header contains the URL of the previous webpage that linked to the currently requested resource.__
+
+
+- Some applications validate the Referer header when it is present in requests but skip the validation if the header is omitted.
+2. if the application validates that the domain in the Referer starts with the expected value or simply validates that the Referer contains its own domain name
+
+
+- many browsers now strip the query string from the Referer header by default to prevent such attacks (but if we set Referrer-Policy: unsafe-url header set -  This ensures that the full URL will be sent, including the query string.)
+
+`Referer: https://arbitrary-incorrect-domain.net?YOUR-LAB-ID.web-security-academy.net`
+`history.pushState("", "", "/?YOUR-LAB-ID.web-security-academy.net")`
+`Referrer-Policy: unsafe-url`
+
+
+# How to prevent CSRF vulnerabilities
+
+1. Use CSRF tokens 
+
+(Unpredictable with high entropy, as for session tokens in general
+
+Tied to the user's session.
+
+Strictly validated in every case before the relevant action is executed.)
+
+* it is generated using cryptographically secure pseudo-random number generator (CSPRNG), seeded with the timestamp when it was created plus a static secret
+
+* transmit the token to the client within a hidden field of an HTML form that is submitted using the POST method
+`<input type="hidden" name="csrf-token" value="CIwNZNlR4XbisJF39I8yWnWX9wX4WFoz" />`
+
+* placing the token into the URL query string is not safe (can be displayed on-screen within the user's browser, also included in http request)
+
+* CSRF tokens within a custom request header
+
+* __CSRF tokens should not be transmitted within cookies__
